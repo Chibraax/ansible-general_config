@@ -1,0 +1,18 @@
+---
+
+# Python ENV
+username: squirrel
+# .rc file
+alias_config:
+  - alias q="exit"
+  - alias cat="bat "
+  - alias ccat="/usr/bin/cat"
+  - alias df="duf --only local"
+  - alias cls="clear"
+  - alias py="/usr/bin/python3"
+  - alias envv="source/home/{{ squirrel }}/.envv/bin/activate"
+  - alias ls="/usr/bin/lsd"
+
+
+# Hostname
+server_hostname: blabla

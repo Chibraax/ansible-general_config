@@ -1,0 +1,59 @@
+---
+- name: Create virtual envv
+  ansible.builtin.shell: |
+    python3 -m venv /home/{{ username }}/.envv/
+    sudo chown -R {{ username }}:{{ username }} /home/{{ username }}/.envv
+  args:
+    creates: /home/{{ username }}/.envv/
+  tags:
+    - venv
+    - gen_config
+
+- name: Add aliases inside .zshrc file For {{ username }}
+  ansible.builtin.lineinfile:
+    path: /home/{{ username_gen_config }}/.zshrc
+    line: "{{ item }}"
+  loop: "{{ alias_config }}"
+  tags:
+    - gen_config
+
+- name: Add aliases inside .zshrc file for ROOT user
+  ansible.builtin.lineinfile:
+    path: /root/.zshrc
+    line: "{{ item }}"
+  loop: "{{ alias_config }}"
+  tags:
+    - gen_config
+
+- name: Set the hostname
+  ansible.builtin.lineinfile:
+    path: /etc/hostname
+    regexp: '^.+'
+    line: "{{ server_hostname }}"
+  become: true
+  notify: reboot
+  tags:
+    - gen_config
+
+- name: Create .vimrc for ROOT user
+  ansible.builtin.lineinfile:
+    path: /root/.vim.rc
+    line: "set number"
+    create: true
+    mode: '0600'
+  become: true
+  notify: reboot
+  tags:
+    - gen_config
+
+- name: Create .vimrc for {{ username }} user
+  ansible.builtin.lineinfile:
+    path: /home/{{ username }}/.vim.rc
+    line: "set number"
+    create: true
+    mode: '0600'
+  become: false
+  become_user: "{{ username }}"
+  notify: reboot
+  tags:
+    - gen_config
