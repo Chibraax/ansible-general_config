@@ -1,14 +1,4 @@
 ---
-- name: Create virtual envv
-  ansible.builtin.shell: |
-    python3 -m venv /home/{{ username }}/.envv/
-    sudo chown -R {{ username }}:{{ username }} /home/{{ username }}/.envv
-  args:
-    creates: /home/{{ username }}/.envv/
-  tags:
-    - venv
-    - gen_config
-
 - name: Add aliases inside .zshrc file For {{ username }}
   ansible.builtin.lineinfile:
     path: /home/{{ username_gen_config }}/.zshrc
