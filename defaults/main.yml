@@ -10,7 +10,7 @@ alias_config:
   - alias df="duf --only local"
   - alias cls="clear"
   - alias py="/usr/bin/python3"
-  - alias envv="source/home/{{ squirrel }}/.envv/bin/activate"
+  - alias envv="source/home/{{ ansible_user }}/.envv/bin/activate"
   - alias ls="/usr/bin/lsd"
 
 
