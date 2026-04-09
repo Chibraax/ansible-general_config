@@ -1,7 +1,7 @@
 ---
 - name: Add aliases inside .zshrc file For {{ username }}
   ansible.builtin.lineinfile:
-    path: /home/{{ username_gen_config }}/.zshrc
+    path: /home/{{ username }}/.zshrc
     line: "{{ item }}"
   loop: "{{ alias_config }}"
   tags:
