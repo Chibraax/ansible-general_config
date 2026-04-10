@@ -25,6 +25,12 @@
   tags:
     - gen_config
 
+- name: Listen ssh Daemon on port 5656
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#Port 22'
+    line: 'Port 5656'
+
 - name: Create .vimrc for ROOT user
   ansible.builtin.lineinfile:
     path: /root/.vim.rc
