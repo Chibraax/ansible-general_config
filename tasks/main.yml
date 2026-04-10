@@ -1,4 +1,15 @@
 ---
+- name: Install ZSH shell + custom config
+  become: false
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.shell: |
+    cd /home/{{ ansible_user }}
+    git clone https://github.com/Chibraax/make_my_shell
+    ./make_my_shell/setup.sh
+  args:
+    creates: "/home/{{ ansible_user }}/.oh-my-zsh/themes/chibraax2.zsh-theme"
+  tags: gen_config
+
 - name: Add aliases inside .zshrc file For {{ username }}
   ansible.builtin.lineinfile:
     path: /home/{{ username }}/.zshrc
@@ -30,6 +41,7 @@
     path: /etc/ssh/sshd_config
     regexp: '^#Port 22'
     line: 'Port 5656'
+  tags: gen_config
 
 - name: Create .vimrc for ROOT user
   ansible.builtin.lineinfile:
