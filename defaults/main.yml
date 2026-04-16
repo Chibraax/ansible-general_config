@@ -2,6 +2,7 @@
 
 # Python ENV
 username: squirrel
+ansible_user: squirrel
 # .rc file
 alias_config:
   - alias q="exit"
