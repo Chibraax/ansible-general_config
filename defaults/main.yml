@@ -6,7 +6,7 @@ ansible_user: squirrel
 # .rc file
 alias_config:
   - alias q="exit"
-  - alias cat="bat "
+  - alias cat="batcat "
   - alias ccat="/usr/bin/cat"
   - alias df="duf --only local"
   - alias cls="clear"
