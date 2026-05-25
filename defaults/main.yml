@@ -17,3 +17,5 @@ alias_config:
 
 # Hostname
 server_hostname: webssh
+# Timezone
+server_timezone: Europe/Paris
