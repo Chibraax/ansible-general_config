@@ -16,4 +16,4 @@ alias_config:
 
 
 # Hostname
-server_hostname: blabla
+server_hostname: webssh

@@ -32,25 +32,20 @@
     line: 'Port 5656'
   tags: gen_config
 
-- name: Create .vimrc for ROOT user
-  ansible.builtin.lineinfile:
-    path: /root/.vim.rc
-    line: "set number"
-    create: true
-    mode: '0600'
-  become: true
-  notify: reboot
-  tags:
-    - gen_config
+- name: Copy vimrc file for root
+  ansible.builtin.copy:
+    src: files/vimrc
+    dest: /root/.vimrc
+    owner: root
+    group: root
+    mode: '0744'
+  tags: gen_config
 
-- name: Create .vimrc for {{ username }} user
-  ansible.builtin.lineinfile:
-    path: /home/{{ username }}/.vim.rc
-    line: "set number"
-    create: true
-    mode: '0600'
-  become: false
-  become_user: "{{ username }}"
-  notify: reboot
-  tags:
-    - gen_config
+- name: Copy vimrc file for user
+  ansible.builtin.copy:
+    src: files/vimrc
+    dest: "/home/{{ ansible_user }}/.vimrc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0744'
+  tags: gen_config
