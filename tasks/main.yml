@@ -18,7 +18,7 @@
 - name: Set the timezone
   ansible.builtin.timezone:
     name: "{{ server_timezone }}"
-  tags: 
+  tags:
     - gen_config
     - utc
 
