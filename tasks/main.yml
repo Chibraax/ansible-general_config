@@ -1,26 +1,39 @@
 ---
-- name: Add aliases inside .zshrc file For {{ username }}
-  ansible.builtin.lineinfile:
+
+- name: Config .zshrc file
+  ansible.builtin.blockinfile:
     path: /home/{{ username }}/.zshrc
-    line: "{{ item }}"
-  loop: "{{ alias_config }}"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      alias q="exit"
+      alias cat="batcat "
+      alias ccat="/usr/bin/cat"
+      alias df="duf --only local"
+      alias cls="clear"
+      alias py="/usr/bin/python3"
+      alias envv="source/home/{{ username }}/.envv/bin/activate"
+      alias ls="/usr/bin/lsd"
   tags:
     - gen_config
 
-- name: Add aliases inside .zshrc file for ROOT user
-  ansible.builtin.lineinfile:
+- name: Config .zshrc file
+  ansible.builtin.blockinfile:
     path: /root/.zshrc
-    line: "{{ item }}"
-  loop: "{{ alias_config }}"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      alias q="exit"
+      alias cat="batcat "
+      alias ccat="/usr/bin/cat"
+      alias df="duf --only local"
+      alias cls="clear"
+      alias py="/usr/bin/python3"
+      alias envv="source/home/{{ username }}/.envv/bin/activate"
+      alias ls="/usr/bin/lsd"
   tags:
     - gen_config
 
-- name: Set the timezone
-  ansible.builtin.timezone:
-    name: "{{ server_timezone }}"
-  tags:
-    - gen_config
-    - utc
 
 - name: Set the hostname
   ansible.builtin.lineinfile:
@@ -36,7 +49,7 @@
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#Port 22'
-    line: 'Port 5656'
+    line: 'Port  {{ port_ssh }}'
   tags: gen_config
 
 - name: Copy vimrc file for root

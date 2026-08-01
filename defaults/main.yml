@@ -16,6 +16,8 @@ alias_config:
 
 
 # Hostname
-server_hostname: webssh
+server_hostname: backup
 # Timezone
 server_timezone: Europe/Paris
+
+port_ssh: 5656
