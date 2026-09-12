@@ -75,3 +75,14 @@
     group: "{{ ansible_user }}"
     mode: '0744'
   tags: gen_config
+
+- name: Install custom ZSH shell
+  become: true
+  become_user: "{{ ansible_user }}"
+  ansible.builtin.shell:
+    curl https://raw.githubusercontent.com/Chibraax/make_my_shell/refs/heads/main/setup.sh | bash
+  args:
+    executable: /bin/bash
+  tags:
+    - gen_config
+    - zsh
