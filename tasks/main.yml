@@ -3,6 +3,7 @@
 - name: Config .zshrc file
   ansible.builtin.blockinfile:
     path: /home/{{ username }}/.zshrc
+    create: true
     append_newline: true
     prepend_newline: true
     block: |
@@ -20,6 +21,7 @@
 - name: Config .zshrc file
   ansible.builtin.blockinfile:
     path: /root/.zshrc
+    create: true
     append_newline: true
     prepend_newline: true
     block: |
