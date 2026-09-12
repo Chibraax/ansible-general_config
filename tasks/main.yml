@@ -35,7 +35,7 @@
       alias py="/usr/bin/python3"
       alias envv="source/home/{{ username }}/.envv/bin/activate"
       alias ls="/usr/bin/lsd"
-    owner: "{{ username }}"
+    owner: "root"
     mode: '0644'
   tags:
     - gen_config
